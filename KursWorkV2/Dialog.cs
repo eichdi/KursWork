@@ -13,11 +13,10 @@ using System.Threading.Tasks;
         {
             set
             {
-                if (!(value == "" || value == null))
+                if (!(value == null))
                 {
                     answer = value;
                 }
-                else throw new ArgumentNullException();
             }
             get
             {

@@ -20,12 +20,14 @@ namespace KursWorkV2
         int id_dialog;
         int id_question;
         int id_answer;
-        bool enterrow;
+        bool enterrow=false;
         int _state = 0;//0-dialogs //1 question // 2 answers //3 JumpTo
         public CreateDialog()
         {
             InitializeComponent();
-            
+            FileDialog.DefaultExt = "*.json";
+            string directory = Application.StartupPath;
+            FileDialog.InitialDirectory = directory;
         }
         public bool Enterrow()
         {
@@ -134,12 +136,12 @@ namespace KursWorkV2
                     toList[i] = dialogs.Dialogs[i].Name;
                 }
                 ShowToListBox(toList);
-                State_Dialog();
             }
             catch (Exception)
             {
                 ShowToListBox(null);
             }
+            State_Dialog();
         }
         public void ShowQuestion(DialogClass dialog)
         {
@@ -182,7 +184,7 @@ namespace KursWorkV2
         public void ShowJump(AnswerClass answer)
         {
             string[] toList = new string[1];
-            toList[0] = textBox.Text;
+            toList[0] = NowAnswer.JumpTo;
             ShowToListBox(toList);
             State_JumpTo();
         }
@@ -211,7 +213,7 @@ namespace KursWorkV2
         }
         public void State_Question()
         {
-            LableText.Text = "Вопросы";
+            LableText.Text = "Вопросы диалога - "+NowDialog.Name;
             LableText.Visible = true;
             textBox.Text = "";
 
@@ -225,7 +227,7 @@ namespace KursWorkV2
         public void State_Answer()
         {
             delete.Visible = true;
-            LableText.Text = "Ответы";
+            LableText.Text = "Ответы вопроса - "+ NowQuestion.Question;
             LableText.Visible = true;
             textBox.Visible = true;
             textBox.Text = "";
@@ -236,7 +238,7 @@ namespace KursWorkV2
         }
         public void State_JumpTo()
         {
-            LableText.Text = "После вопроса переходить в какой диалог";
+            LableText.Text = "После ответа \"" + NowAnswer.Answer + "\" переходить в какой диалог";
             LableText.Visible = true;
             textBox.Visible = true;
             textBox.Text = "";
@@ -348,28 +350,32 @@ namespace KursWorkV2
             {
                 _path = textBox.Text;
                 dialogs = new DialogsClass();
-                State_Dialog();
+                _state = 0;
+                ShowDialogs();
+
             }
             else
             {
-                
-                switch (_state)
+                if (Enterrow())
                 {
-                    case 0:
-                        //if(NowDialog.Questions!=null)
+                    switch (_state)
+                    {
+                        case 0:
+                            //if(NowDialog.Questions!=null)
                             _state = 1;
-                        break;
-                    case 1:
-                        //if(NowQuestion.Answers!=null)
+                            break;
+                        case 1:
+                            //if(NowQuestion.Answers!=null)
                             _state = 2;
-                        break;
-                    case 2:
-                        //if(NowAnswer.JumpTo!=null)
+                            break;
+                        case 2:
+                            //if(NowAnswer.JumpTo!=null)
                             _state = 3;
-                        break;
-                    case 3:
-                        break;
+                            break;
+                        case 3:
+                            break;
 
+                    }
                 }
                 Show();
             }
@@ -400,23 +406,34 @@ namespace KursWorkV2
         
         public void DeleteDialog()
         {
-            if(Enterrow())
-                dialogs.Dialogs.Where(n => dialogs.Dialogs.ElementAt(id_dialog) != n);
+            if (Enterrow())
+            {
+                List<DialogClass> deletelist = dialogs.Dialogs.ToList();
+                deletelist.RemoveAt(id_dialog);
+                dialogs.Dialogs = deletelist.ToArray();
+            }
         }
         public void DeleteQuestion()
         {
             if (Enterrow())
-                NowDialog.Questions.Where(n => NowDialog.Questions.ElementAt(id_question) != n);
+            {
+                List<QuestionClass> deletelist = NowDialog.Questions.ToList();
+                deletelist.RemoveAt(id_question);
+                NowDialog.Questions = deletelist.ToArray();
+            }
         }
         public void DeleteAnswer()
         {
 
             if (Enterrow())
-                NowQuestion.Answers.Where(n => NowQuestion.Answers.ElementAt(id_answer) != n);
+            {
+                List<AnswerClass> deletelist = NowQuestion.Answers.ToList();
+                deletelist.RemoveAt(id_answer);
+                NowQuestion.Answers = deletelist.ToArray();
+            }
         }
         public void DeleteJumpTo()
         {
-            if (Enterrow())
                 NowAnswer.JumpTo = "";
         }
 
@@ -438,7 +455,6 @@ namespace KursWorkV2
         }
         public void EditJumpTo() 
         {
-            if (Enterrow())
                 NowAnswer.JumpTo = textBox.Text;
         }
 
