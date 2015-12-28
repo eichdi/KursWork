@@ -37,7 +37,7 @@ namespace KursWorkV2
             }
             return enterrow;
         }
-        public void Show()
+        public void Show1()
         {
             switch (_state)
             {
@@ -377,7 +377,7 @@ namespace KursWorkV2
 
                     }
                 }
-                Show();
+                Show1();
             }
         }
 
@@ -400,7 +400,7 @@ namespace KursWorkV2
                     break;
 
             }
-            Show();
+            Show1();
 
         }
         
@@ -478,7 +478,7 @@ namespace KursWorkV2
                     break;
 
             }
-            Show();
+            Show1();
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -499,7 +499,7 @@ namespace KursWorkV2
                     break;
 
             }
-            Show();
+            Show1();
         }
 
         private void DialogList_ItemActivate(object sender, EventArgs e)
@@ -543,7 +543,7 @@ namespace KursWorkV2
                     break;
 
             }
-            Show();
+            Show1();
         }
 
         

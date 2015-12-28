@@ -18,7 +18,7 @@ namespace KursWorkV2
             InitializeComponent();
             try
             {
-                StreamReader LableReader = new StreamReader("HelpCreateDialog.txt");
+                StreamReader LableReader = new StreamReader("HelpCreateQuesion.txt");
                 richTextBox1.Text = LableReader.ReadToEnd();
                 LableReader.Close();
 

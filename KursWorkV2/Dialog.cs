@@ -85,15 +85,7 @@ using System.Threading.Tasks;
             }
         }
 
-        /*public QuestionClass(string[] Answers, string Question)
-        {
-            this.Answers = Answers;
-            this.Question = Question;
-        }
-        public QuestionClass(string Question)
-        {
-            this.Question = Question;
-        }*/
+        
     }
 
     public class DialogClass
@@ -131,16 +123,7 @@ using System.Threading.Tasks;
                 return questions;
             }
         }
-        //public DialogClass(QuestionClass[] Questions, string Name)
-        //{
-        //    this.Questions = Questions;
-        //    this.Name = Name;
-        //}
-        //public DialogClass(string Name)
-        //{
-        //    this.Name = Name;
-        //    this.Questions = null;
-        //}
+        
    }
 
     public class DialogsClass
