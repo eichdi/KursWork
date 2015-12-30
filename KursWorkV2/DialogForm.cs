@@ -155,41 +155,85 @@ namespace KursWorkV2
         {
             if (ansBox.Text != "Свободный выбор ответа")
             {
-                return ansBox.Text.Contains(ansText.Text);
+                return Contains(dialog.Questions[index_question], ansText.Text);
             }
             else return true;
         }
+
+		private AnswerClass FindAnswer(QuestionClass question, string answer) {
+			foreach (AnswerClass expected in question.Answers) {
+				if (expected.Answer == answer) {
+					return expected;
+				}
+			}
+			return null;
+		}
+
+		private bool Contains(QuestionClass question, string answer) 
+		{
+			foreach (AnswerClass expected in question.Answers) {
+				if (expected.Answer == answer) {
+					return true;
+				}
+			}
+			return false;
+		}
+
         private void новыйДиалогToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileDialog.ShowDialog();
-            
-                _path = FileDialog.FileName;
+			try {
+				FileDialog.ShowDialog();
+
+				_path = FileDialog.FileName;
                 StreamReader sr = new StreamReader(_path);
 
                 dialogs = JsonConvert.DeserializeObject<DialogsClass>(sr.ReadToEnd());
                 sr.Close();
                 NextQuestion();
 
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("Такого файла нет");
-            //}
-        }
+			} catch (Exception) {
+				MessageBox.Show("Неверный формат файла.");
+			}
+		}
 
-        private void ok_Click(object sender, EventArgs e)
+		private void JumpTo(string goal) {
+			for (int i = 0; i < dialogs.Dialogs.Length; i++) {
+				if (dialogs.Dialogs[i].Name == goal) {
+					index_dialog = i;
+					dialog = dialogs.Dialogs[i];
+				}
+			}
+		}
+
+		private void ok_Click(object sender, EventArgs e)
         {
             if (index_ndialog != -2)
             {
                 if (AnsTrue())
                 {
-                    if (!(questBox.Text == "Завершить работу?" && ansText.Text == "Да"))
+					AnswerClass answer;
+					try {
+						answer = FindAnswer(dialog.Questions[index_question], ansText.Text);
+					} catch (Exception) {
+						answer = null;
+					}
+					if (!(questBox.Text == "Завершить работу?" && answer.Answer == "Да"))
                     {
                         MetodAfterQuestion(questBox.Text);
                         SaveToTable();
                         ClearForm();
-                        NextQuestion();
-                    }
+						if (answer == null) {
+							NextQuestion();
+						} else {
+							if (answer.JumpTo == "") {
+								NextQuestion();
+							} else {
+								JumpTo(answer.JumpTo);
+								index_question = 0;
+								ShowToForm(dialog.Questions[index_question]);
+							}
+						}
+					}
                     else
                     {
                         Application.Exit();
@@ -225,7 +269,12 @@ namespace KursWorkV2
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Программа демонстрирует реализацию реляционной модели данных.\n\nПрограмма была создана как практическая часть курсовой работы по дисциплине \"Проектирование человеко-машинного интерфейса\" (ПЧМИ)\nВерсия программы 1.0 \nРазработчик: студент КФУ ИВМиИТ 2 курса гр. 09-411 Хайрутдинов С.З\nПроверил: старший преподаватель кафедры технологий программирования Георгиев В.О.", "Информация о программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Программа демонстрирует реализацию фреймовой модели знаний.\n\n" +
+				"Программа была создана как практическая часть курсовой работы по дисциплине" + 
+				"\"Проектирование человеко-машинного интерфейса\" (ПЧМИ)\nВерсия программы 1.0 \n" +
+				"Разработчик: студент КФУ ИВМиИТ 2 курса гр. 09-411 Николаев А.Ю.\n" +
+				"Проверил: старший преподаватель кафедры технологий программирования" +
+				"Георгиев В.О.", "Информация о программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

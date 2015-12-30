@@ -356,8 +356,6 @@ namespace KursWorkV2
             }
             else
             {
-                if (Enterrow())
-                {
                     switch (_state)
                     {
                         case 0:
@@ -376,109 +374,35 @@ namespace KursWorkV2
                             break;
 
                     }
-                }
                 Show1();
             }
         }
 
         private void add_Click(object sender, EventArgs e)
         {
-            //0-dialogs //1 question // 2 answers //3 JumpTo
-            switch (_state)
-            {
-                case 0:
-                    AddDialog();
-                    break;
-                case 1:
-                    AddQuestion();
-                    break;
-                case 2:
-                    AddAnswer();
-                    break;
-                case 3:
-                    AddJumpTo();
-                    break;
+			//0 - dialogs //1 question // 2 answers //3 JumpTo
+			switch (_state) {
+				case 0:
+					AddDialog();
+					break;
+				case 1:
+					AddQuestion();
+					break;
+				case 2:
+					AddAnswer();
+					break;
+				case 3:
+					AddJumpTo();
+					break;
 
-            }
-            Show1();
+			}
+			Show1();
 
-        }
+		}
         
-        public void DeleteDialog()
-        {
-            if (Enterrow())
-            {
-                List<DialogClass> deletelist = dialogs.Dialogs.ToList();
-                deletelist.RemoveAt(id_dialog);
-                dialogs.Dialogs = deletelist.ToArray();
-            }
-        }
-        public void DeleteQuestion()
-        {
-            if (Enterrow())
-            {
-                List<QuestionClass> deletelist = NowDialog.Questions.ToList();
-                deletelist.RemoveAt(id_question);
-                NowDialog.Questions = deletelist.ToArray();
-            }
-        }
-        public void DeleteAnswer()
-        {
-
-            if (Enterrow())
-            {
-                List<AnswerClass> deletelist = NowQuestion.Answers.ToList();
-                deletelist.RemoveAt(id_answer);
-                NowQuestion.Answers = deletelist.ToArray();
-            }
-        }
-        public void DeleteJumpTo()
-        {
-                NowAnswer.JumpTo = "";
-        }
-
-        public void EditDialog()
-        {
-
-            if (Enterrow())
-                NowDialog.Name = textBox.Text;
-        }
-        public void EditQuestion()
-        {
-            if (Enterrow())
-                NowQuestion.Question = textBox.Text;
-        }
-        public void EditAnswer()
-        {
-            if (Enterrow())
-                NowAnswer.Answer = textBox.Text;
-        }
-        public void EditJumpTo() 
-        {
-                NowAnswer.JumpTo = textBox.Text;
-        }
-
-
-
         private void edit_Click(object sender, EventArgs e)
         {
-            switch (_state)
-            {
-                case 0:
-                    EditDialog();
-                    break;
-                case 1:
-                    EditQuestion();
-                    break;
-                case 2:
-                    EditAnswer();
-                    break;
-                case 3:
-                    EditJumpTo();
-                    break;
-
-            }
-            Show1();
+			((DataGridViewTextBoxCell) Grid.SelectedCells[0]).Value = textBox.Text;			
         }
 
         private void back_Click(object sender, EventArgs e)
@@ -527,24 +451,8 @@ namespace KursWorkV2
 
         private void delete_Click(object sender, EventArgs e)
         {
-            switch (_state)
-            {
-                case 0:
-                    DeleteDialog();
-                    break;
-                case 1:
-                    DeleteQuestion();
-                    break;
-                case 2:
-                    DeleteAnswer();
-                    break;
-                case 3:
-                    DeleteJumpTo();
-                    break;
-
-            }
-            Show1();
-        }
+			Grid.Rows.RemoveAt(Grid.SelectedCells[0].RowIndex);
+		}
 
         
     }
