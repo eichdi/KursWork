@@ -399,12 +399,79 @@ namespace KursWorkV2
 			Show1();
 
 		}
-        
-        private void edit_Click(object sender, EventArgs e)
+
+        public void DeleteDialog()
         {
-			((DataGridViewTextBoxCell) Grid.SelectedCells[0]).Value = textBox.Text;			
+            
+                List<DialogClass> deletelist = dialogs.Dialogs.ToList();
+                deletelist.RemoveAt(id_dialog);
+                dialogs.Dialogs = deletelist.ToArray();
+            
+        }
+        public void DeleteQuestion()
+        {
+           
+                List<QuestionClass> deletelist = NowDialog.Questions.ToList();
+                deletelist.RemoveAt(id_question);
+                NowDialog.Questions = deletelist.ToArray();
+            
+        }
+        public void DeleteAnswer()
+        {
+
+                List<AnswerClass> deletelist = NowQuestion.Answers.ToList();
+                deletelist.RemoveAt(id_answer);
+                NowQuestion.Answers = deletelist.ToArray();
+            
+        }
+        public void DeleteJumpTo()
+        {
+            NowAnswer.JumpTo = "";
         }
 
+        public void EditDialog()
+        {
+
+            
+                NowDialog.Name = textBox.Text;
+        }
+        public void EditQuestion()
+        {
+            
+                NowQuestion.Question = textBox.Text;
+        }
+        public void EditAnswer()
+        {
+            
+                NowAnswer.Answer = textBox.Text;
+        }
+        public void EditJumpTo()
+        {
+            NowAnswer.JumpTo = textBox.Text;
+        }
+
+
+
+        private void edit_Click(object sender, EventArgs e)
+        {
+            switch (_state)
+            {
+                case 0:
+                    EditDialog();
+                    break;
+                case 1:
+                    EditQuestion();
+                    break;
+                case 2:
+                    EditAnswer();
+                    break;
+                case 3:
+                    EditJumpTo();
+                    break;
+
+            }
+            Show1();
+        }
         private void back_Click(object sender, EventArgs e)
         {
             switch (_state)
@@ -451,8 +518,24 @@ namespace KursWorkV2
 
         private void delete_Click(object sender, EventArgs e)
         {
-			Grid.Rows.RemoveAt(Grid.SelectedCells[0].RowIndex);
-		}
+            switch (_state)
+            {
+                case 0:
+                    DeleteDialog();
+                    break;
+                case 1:
+                    DeleteQuestion();
+                    break;
+                case 2:
+                    DeleteAnswer();
+                    break;
+                case 3:
+                    DeleteJumpTo();
+                    break;
+
+            }
+            Show1();
+        }
 
         
     }
