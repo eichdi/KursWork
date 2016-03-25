@@ -16,7 +16,7 @@ namespace KursWorkV2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DialogForm());
+            Application.Run(new CreateDialog());
         }
     }
 }

@@ -22,7 +22,7 @@ namespace KursWorkV2
         int index_question=-1;
         //int id_answer;
         DialogsClass dialogs;
-        QuestionClass question;
+        Question question;
         DialogClass dialog;
         
         public DialogForm()
@@ -79,7 +79,7 @@ namespace KursWorkV2
             }
             return -1;
         }
-        public void ShowToForm(QuestionClass q)
+        public void ShowToForm(Question q)
         {
             questBox.Text = q.Question;
             string a;
@@ -160,7 +160,7 @@ namespace KursWorkV2
             else return true;
         }
 
-		private AnswerClass FindAnswer(QuestionClass question, string answer) {
+		private AnswerClass FindAnswer(Question question, string answer) {
 			foreach (AnswerClass expected in question.Answers) {
 				if (expected.Answer == answer) {
 					return expected;
@@ -169,7 +169,7 @@ namespace KursWorkV2
 			return null;
 		}
 
-		private bool Contains(QuestionClass question, string answer) 
+		private bool Contains(Question question, string answer) 
 		{
 			foreach (AnswerClass expected in question.Answers) {
 				if (expected.Answer == answer) {

@@ -60,13 +60,8 @@
     <Compile Include="CreateDialog.Designer.cs">
       <DependentUpon>CreateDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogController.cs" />
     <Compile Include="Dialog.cs" />
-    <Compile Include="DialogForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DialogForm.Designer.cs">
-      <DependentUpon>DialogForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="HelpDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,16 +69,12 @@
       <DependentUpon>HelpDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="LipMetods.cs" />
-    <Compile Include="MetodAfterQuestion.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MetodAfterQuestion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Saver.cs" />
     <EmbeddedResource Include="CreateDialog.resx">
       <DependentUpon>CreateDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DialogForm.resx">
-      <DependentUpon>DialogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelpDialog.resx">
       <DependentUpon>HelpDialog.cs</DependentUpon>
