@@ -187,6 +187,7 @@ namespace KursWorkV2
         }
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string a = controller.Head.ToString();
             SaveJson();
         }
 

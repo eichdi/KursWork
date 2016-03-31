@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DialogModel;
 
 namespace Saver
 {
@@ -24,14 +25,14 @@ namespace Saver
     {
         private UnitS[] unitS;
         private string type;
-        public  string ConstructObject()
+        public static string ConstructObject(UnitS[] unitS,string type)
         {
             string result= "";
             for (int i = 0; i < unitS.Length - 1; i++)
             {
                 result += unitS[i].ToString()+";";
             }
-            result+=unitS[unitS.Length - 1];
+            result+=unitS[unitS.Length - 1].ToString();
             return "{" + type + "|" + result + "|}";
         }
         public ObjectS(string type, UnitS[] unitS)
@@ -39,6 +40,7 @@ namespace Saver
             this.unitS = unitS;
             this.type = type;
         }
+        
     }
     
 }
