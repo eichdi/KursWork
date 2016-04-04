@@ -17,7 +17,6 @@ namespace DialogModel
         T Get(int index);
     }
 
-    //TO DO IShow нужен ли?
     public class AnswerElem
     {
         private string answer;
@@ -65,6 +64,7 @@ namespace DialogModel
             return obj.ToString();
         }
     }
+
     public class AnswerClass:IADE<AnswerElem>
     {
         private List<AnswerElem> answer;
@@ -188,6 +188,7 @@ namespace DialogModel
         }
 
     }
+
     public class QuestionClass:IADE<QuestionElem>
     {
         private List<QuestionElem> question;
@@ -254,9 +255,9 @@ namespace DialogModel
         }
     }
 
+
     public class DialogElem
     {
-
         private string name;
         private QuestionClass questions;
         public string Name
@@ -298,6 +299,7 @@ namespace DialogModel
             return obj.ToString();
         }
     }
+
     public class DialogClass:IADE<DialogElem>
     {
         private List<DialogElem> dialogs = null;

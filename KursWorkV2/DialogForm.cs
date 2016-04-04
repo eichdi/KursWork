@@ -29,22 +29,23 @@ namespace KursWorkV2
             dt.Columns.Add(colq);
             dt.Columns.Add(cola);
             qaTable.DataSource = dt;
-
-
         }
-        // SATRT CONTROL TEST DOCSYS RATE SAVE END
+
+
         
-        public void ShowToForm(Question q)
+        public void ShowToForm()
         {
             
 
         }
+        //готовая форма
         public void ClearForm()
         {
             ansBox.Text = "";
             questBox.Text = "";
             errBox.Text= "";
             ansText.Text = "";
+            answerСomboBox.ContextMenu.MenuItems.Clear();
         }
 
         public void NextQuestion()

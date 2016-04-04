@@ -45,6 +45,7 @@
             this.ansText = new System.Windows.Forms.TextBox();
             this.ok = new System.Windows.Forms.Button();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.answerСomboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.qaTable)).BeginInit();
             this.SuspendLayout();
@@ -130,16 +131,16 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.qaTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.qaTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.qaTable.Location = new System.Drawing.Point(12, 162);
+            this.qaTable.Location = new System.Drawing.Point(12, 171);
             this.qaTable.Name = "qaTable";
             this.qaTable.ReadOnly = true;
-            this.qaTable.Size = new System.Drawing.Size(382, 117);
+            this.qaTable.Size = new System.Drawing.Size(382, 123);
             this.qaTable.TabIndex = 1;
             // 
             // errBox
             // 
             this.errBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.errBox.Location = new System.Drawing.Point(12, 136);
+            this.errBox.Location = new System.Drawing.Point(11, 300);
             this.errBox.Name = "errBox";
             this.errBox.Size = new System.Drawing.Size(383, 20);
             this.errBox.TabIndex = 2;
@@ -185,11 +186,20 @@
             // 
             this.FileDialog.FileName = "openFileDialog1";
             // 
+            // answerСomboBox
+            // 
+            this.answerСomboBox.FormattingEnabled = true;
+            this.answerСomboBox.Location = new System.Drawing.Point(11, 142);
+            this.answerСomboBox.Name = "answerСomboBox";
+            this.answerСomboBox.Size = new System.Drawing.Size(382, 21);
+            this.answerСomboBox.TabIndex = 7;
+            // 
             // DialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 291);
+            this.ClientSize = new System.Drawing.Size(406, 332);
+            this.Controls.Add(this.answerСomboBox);
             this.Controls.Add(this.ok);
             this.Controls.Add(this.ansText);
             this.Controls.Add(this.ansBox);
@@ -227,5 +237,6 @@
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.OpenFileDialog FileDialog;
         private System.Windows.Forms.ToolStripMenuItem AboutProgToolStripMenuItem;
+        private System.Windows.Forms.ComboBox answerСomboBox;
     }
 }

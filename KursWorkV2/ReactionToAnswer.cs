@@ -54,30 +54,52 @@ namespace React
         }
         public ReactionToAnswer()
         {
+            //заполнение строго по верхнему регистру 
             JumpTo_Reac.Add("DIALOG:START", null);
-            JumpTo_Reac.Add("FUNC:Start()", Start);
-            JumpTo_Reac.Add("FUNC:Test()", Test);
-            JumpTo_Reac.Add("FUNC:SysDoc()", SysDoc);
-            JumpTo_Reac.Add("FUNC:Quality()", Quality);
-            JumpTo_Reac.Add("FUNC:End()", End);
-            JumpTo_Reac.Add("FUNC:Show();DIALOG:END", Show);
+            JumpTo_Reac.Add("FUNC:START()", Start);
+            JumpTo_Reac.Add("FUNC:TEST()", Test);
+            JumpTo_Reac.Add("FUNC:SYSDOC()", SysDoc);
+            JumpTo_Reac.Add("FUNC:QUALITY()", Quality);
+            JumpTo_Reac.Add("FUNC:END()", End);
+            JumpTo_Reac.Add("FUNC:SHOW()", Show);
             JumpTo_Reac.Add("DIALOG:END", Show);
         }
 
+        
+        private static string GetBy(string jumpTo, string word)
+        {
+            word += ":";
+            //быдлокод написан на пьяную голову где нужны регулярные выражения а у меня нет интернета
+            jumpTo = jumpTo.ToUpper();
+            int i;
+            for (i = 0; i + 7 < jumpTo.Length; i++)
+            {
+                if (word == jumpTo.Substring(i, 7))
+                {
+                    i += 7;
+                    int start = i;
+                    while (jumpTo[i] != ';' || i < jumpTo.Length)
+                    {
+                        i++;
+                    }
+                    return jumpTo.Substring(start, i);
+                }
+            }
+            return null;
+        }
+        public static string GetDialogName(string jumpTo)
+        {
+            return GetBy(jumpTo, "Dialog");
+        }
+        public static string GetFuncName(string jumpTo)
+        {
+            return GetBy(jumpTo, "FUNC");
+        }
         //реакция на вопросы
         public string Rection(string jumpTo)
         {
-            this.JumpTo_Reac[jumpTo]();
-            if (jumpTo.StartsWith("DIALOG:"))
-            {
-                int i=7;
-                while (i < jumpTo.Length && jumpTo != ";")
-                {
-                    i++;
-                }
-                return jumpTo.Substring(8, i);
-            }
-            else return null;
+            this.JumpTo_Reac["FUNC:"+ReactionToAnswer.GetFuncName(jumpTo)]();
+            return ReactionToAnswer.GetDialogName(jumpTo);
         }
     }
 }

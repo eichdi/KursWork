@@ -17,7 +17,15 @@ namespace KursWorkV2
         private int nowQuestion=0;
         private bool ready;
         private string _path;
+        private ReactionToAnswer react = new ReactionToAnswer();
 
+        public bool Ready
+        {
+            get
+            {
+                return ready;
+            }
+        }
         public DialogElem NowDialog
         {
             get 
@@ -63,12 +71,13 @@ namespace KursWorkV2
             ready = dialogs!=null;
 
         }
+
+        //к первому вопросу диалога
         private void ToStartNowDialog()
         {
             nowQuestion = 0;
         }
-
-
+        //переход к следущему диалогу
         private bool NextDialog()
         {
             nowDialog++;
@@ -89,28 +98,89 @@ namespace KursWorkV2
                 }
             }
         }
-        public QuestionElem NextQuestion()
+        //переход к следущему вопросу
+        private bool NextQuestion()
         {
             nowQuestion++;
+            if (QuestonExistenceNext())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //существование следущего вопроса
+        public bool QuestonExistenceNext()
+        {
             if (NowQuestion == null)
             {
                 if (NextDialog())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        //переход к следущему вопросу
+        private void ToDialog(string nameDialog)
+        {
+            for (int i = 0; i < dialogs.Dialogs.Length; i++)
+            {
+                if (nameDialog == dialogs.Dialogs[i].Name)
+                {
+                    int save = nowDialog;
+                    nowDialog = i;
+                    if (NowDialog.Questions == null)
+                    {
+                        nowDialog = save;
+                    }
+                    else
+                    {
+                        ToStartNowDialog();
+                    }
+                    break;
+                }
+            }
+        }
+
+        public QuestionElem Next(AnswerElem answer)
+        {
+            string nextDialogName = react.Rection(answer.JumpTo);
+            if (nextDialogName == null)
+            {
+                if (NextQuestion())
                 {
                     return NowQuestion;
                 }
                 else
                 {
+                    ready = false;
                     return null;
                 }
             }
             else
             {
-                return NowQuestion;
+                ToDialog(nextDialogName);
+                if (QuestonExistenceNext())
+                {
+                    return NowQuestion;
+                }
+                else
+                {
+                    ready = false;
+                    return null;
+                }
             }
-        }
-        public QuestionElem Next()
-        {
-            return NextQuestion();
         }
     }
 }

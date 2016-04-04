@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json;
 using DialogModel;
+using System.Xml.Serialization;
 
 namespace KursWorkV2
 {
@@ -141,6 +142,8 @@ namespace KursWorkV2
             Show();
         }
 
+
+        //функции сохранения тут потому что я не добился того чтоб он сохранял
         public void SaveJson()
         {
             //StreamWriter sw = new StreamWriter("/Saves/save.json");
@@ -152,6 +155,13 @@ namespace KursWorkV2
             //work
             StreamWriter sw = new StreamWriter("/Saves/save.json");
             sw.Write(JsonConvert.SerializeObject(controller.Head));
+            sw.Flush();
+            sw.Close();
+        }
+        public void SaveXML()
+        {
+            StreamWriter sw = new StreamWriter("/Saves/save.json");
+            //sw.Write();
             sw.Flush();
             sw.Close();
         }
@@ -182,13 +192,15 @@ namespace KursWorkV2
         
         private void какСозаватьДиалогToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HelpDialog temp = new HelpDialog();
-            temp.Show();
         }
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string a = controller.Head.ToString();
-            SaveJson();
+            //НЕ МОГУ СЕРИЛИЗОВАТЬ! ОСТАНАВЛИВАЕТ ПРОЦЕСС РАЗРАБОТКИ! 
+            //TODO HOT FIX
+            //string a = controller.Head.ToString();
+            //SaveJson();
+            //SaveXML();
+
         }
 
         private void enter_Click(object sender, EventArgs e)
