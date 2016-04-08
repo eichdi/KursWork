@@ -198,7 +198,7 @@ namespace KursWorkV2
             //НЕ МОГУ СЕРИЛИЗОВАТЬ! ОСТАНАВЛИВАЕТ ПРОЦЕСС РАЗРАБОТКИ! 
             //TODO HOT FIX
             //string a = controller.Head.ToString();
-            //SaveJson();
+            SaveJson();
             //SaveXML();
 
         }

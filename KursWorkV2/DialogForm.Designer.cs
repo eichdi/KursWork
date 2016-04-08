@@ -41,8 +41,6 @@
             this.qaTable = new System.Windows.Forms.DataGridView();
             this.errBox = new System.Windows.Forms.RichTextBox();
             this.questBox = new System.Windows.Forms.RichTextBox();
-            this.ansBox = new System.Windows.Forms.RichTextBox();
-            this.ansText = new System.Windows.Forms.TextBox();
             this.ok = new System.Windows.Forms.Button();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.answerСomboBox = new System.Windows.Forms.ComboBox();
@@ -131,10 +129,10 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.qaTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.qaTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.qaTable.Location = new System.Drawing.Point(12, 171);
+            this.qaTable.Location = new System.Drawing.Point(12, 193);
             this.qaTable.Name = "qaTable";
             this.qaTable.ReadOnly = true;
-            this.qaTable.Size = new System.Drawing.Size(382, 123);
+            this.qaTable.Size = new System.Drawing.Size(382, 101);
             this.qaTable.TabIndex = 1;
             // 
             // errBox
@@ -151,30 +149,13 @@
             this.questBox.Location = new System.Drawing.Point(12, 43);
             this.questBox.Name = "questBox";
             this.questBox.ReadOnly = true;
-            this.questBox.Size = new System.Drawing.Size(188, 61);
+            this.questBox.Size = new System.Drawing.Size(381, 94);
             this.questBox.TabIndex = 3;
             this.questBox.Text = "";
             // 
-            // ansBox
-            // 
-            this.ansBox.Location = new System.Drawing.Point(206, 43);
-            this.ansBox.Name = "ansBox";
-            this.ansBox.ReadOnly = true;
-            this.ansBox.Size = new System.Drawing.Size(188, 61);
-            this.ansBox.TabIndex = 4;
-            this.ansBox.Text = "";
-            // 
-            // ansText
-            // 
-            this.ansText.Location = new System.Drawing.Point(12, 110);
-            this.ansText.Name = "ansText";
-            this.ansText.Size = new System.Drawing.Size(296, 20);
-            this.ansText.TabIndex = 5;
-            this.ansText.Text = "Введите ответ";
-            // 
             // ok
             // 
-            this.ok.Location = new System.Drawing.Point(314, 110);
+            this.ok.Location = new System.Drawing.Point(313, 165);
             this.ok.Name = "ok";
             this.ok.Size = new System.Drawing.Size(80, 20);
             this.ok.TabIndex = 6;
@@ -189,9 +170,9 @@
             // answerСomboBox
             // 
             this.answerСomboBox.FormattingEnabled = true;
-            this.answerСomboBox.Location = new System.Drawing.Point(11, 142);
+            this.answerСomboBox.Location = new System.Drawing.Point(11, 166);
             this.answerСomboBox.Name = "answerСomboBox";
-            this.answerСomboBox.Size = new System.Drawing.Size(382, 21);
+            this.answerСomboBox.Size = new System.Drawing.Size(297, 21);
             this.answerСomboBox.TabIndex = 7;
             // 
             // DialogForm
@@ -201,8 +182,6 @@
             this.ClientSize = new System.Drawing.Size(406, 332);
             this.Controls.Add(this.answerСomboBox);
             this.Controls.Add(this.ok);
-            this.Controls.Add(this.ansText);
-            this.Controls.Add(this.ansBox);
             this.Controls.Add(this.questBox);
             this.Controls.Add(this.errBox);
             this.Controls.Add(this.qaTable);
@@ -225,7 +204,6 @@
         private System.Windows.Forms.DataGridView qaTable;
         private System.Windows.Forms.RichTextBox errBox;
         private System.Windows.Forms.RichTextBox questBox;
-        private System.Windows.Forms.RichTextBox ansBox;
         private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newDialog;
         private System.Windows.Forms.ToolStripMenuItem OpenDialogToolStripMenuItem;
@@ -233,7 +211,6 @@
         private System.Windows.Forms.ToolStripMenuItem HowCreateQuestionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DocToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem HowWorkToolStripMenuItem;
-        private System.Windows.Forms.TextBox ansText;
         private System.Windows.Forms.Button ok;
         private System.Windows.Forms.OpenFileDialog FileDialog;
         private System.Windows.Forms.ToolStripMenuItem AboutProgToolStripMenuItem;

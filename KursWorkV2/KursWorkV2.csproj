@@ -68,11 +68,12 @@
     <Compile Include="DialogForm.Designer.cs">
       <DependentUpon>DialogForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogMove.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressDialogController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider.cs" />
     <Compile Include="ReactionToAnswer.cs" />
-    <Compile Include="Saver.cs" />
     <EmbeddedResource Include="CreateDialog.resx">
       <DependentUpon>CreateDialog.cs</DependentUpon>
     </EmbeddedResource>

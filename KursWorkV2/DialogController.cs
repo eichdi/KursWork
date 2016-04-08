@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DialogModel;
+using Provider;
 
 namespace KursWorkV2
 {
@@ -36,7 +37,7 @@ namespace KursWorkV2
         {
             get
             {
-                return head;
+                return new DialogClass(head.Dialogs);
             }
         }
         public DialogElem NowDialog
@@ -105,6 +106,22 @@ namespace KursWorkV2
             return null;
         }
 
+        public void Load(string path)
+        {
+            head = DialogProvider.Open(path);
+        }
+        public void Load()
+        {
+            Load(this._path);
+        }
+        public void Save(string path)
+        {
+            DialogProvider.Save(path, head);
+        }
+        public void Save()
+        {
+            Save(_path);
+        }
 
         //Выполняет переход к другому состоянию контроллера
 

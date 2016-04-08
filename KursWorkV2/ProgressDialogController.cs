@@ -5,20 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using DialogModel;
 using React;
+using Provider;
+using LogMove;
 
 namespace KursWorkV2
 {
     
     class ProgressDialogController
     {
-        //провайдер какой то
         private DialogClass dialogs;
         private int nowDialog=0;
         private int nowQuestion=0;
         private bool ready;
         private string _path;
         private ReactionToAnswer react = new ReactionToAnswer();
+        private LogDialog log;
 
+        public LogDialog Log
+        {
+            get
+            {
+                return log;
+            }
+        }
         public bool Ready
         {
             get
@@ -66,11 +75,11 @@ namespace KursWorkV2
         public ProgressDialogController(string _path)
         {
             this._path = _path;
-            //вызов провайдера по пути
-
+            this.dialogs = IProvider.Open(_path);
             ready = dialogs!=null;
-
         }
+
+
 
         //к первому вопросу диалога
         private void ToStartNowDialog()
@@ -181,6 +190,32 @@ namespace KursWorkV2
                     return null;
                 }
             }
+        }
+        public QuestionElem Next(AnswerElem answer, LogDialog log)
+        {
+            log.AddQuestion(new QuestionMove(NowQuestion,answer));
+            return Next(answer);
+        }
+        public void SaveLog(string path)
+        {
+           LogProvider.Save(path, Log);
+        }
+        private void OpenLog(string path)
+        {
+            log = LogProvider.Open(path);
+        }
+        public void LoadDialog(string path)
+        {
+            if (_path != "" || _path != null)
+                this.dialogs = DialogProvider.Open(_path);
+            if (this.dialogs != null)
+            {
+                ready = true;
+            }
+        }
+        public void LoadDialog()
+        {
+            LoadDialog(_path);   
         }
     }
 }

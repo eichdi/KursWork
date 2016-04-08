@@ -33,7 +33,7 @@ namespace KursWorkV2
 
 
         
-        public void ShowToForm()
+        public void ShowToForm(QuestionElem question)
         {
             
 
@@ -41,18 +41,36 @@ namespace KursWorkV2
         //готовая форма
         public void ClearForm()
         {
-            ansBox.Text = "";
             questBox.Text = "";
             errBox.Text= "";
-            ansText.Text = "";
             answerСomboBox.ContextMenu.MenuItems.Clear();
+        }
+        public AnswerElem GetAnswer()
+        {
+            return new AnswerElem(answerСomboBox.SelectedText, "");
         }
 
         public void NextQuestion()
         {
-            
+            if(controller.Ready)
+            {
+                QuestionElem question = controller.Next(GetAnswer());
+                if (question != null)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Dialog is not ready");
+            }
             
         }
+
         public void SaveToTable()
         {
             DataTable dt = (DataTable)qaTable.DataSource;
@@ -72,27 +90,30 @@ namespace KursWorkV2
 
         private void NewDialog(object sender, EventArgs e)
         {
-
+            this.Visible = false;
+            this.Close();
+            Application.Run(new CreateDialog());
         }
 
         private void OpenDialog(object sender, EventArgs e)
         {
-
+            FileDialog.ShowDialog();
+            controller = new ProgressDialogController(FileDialog.FileName);
         }
 
         private void HowCreateDialog(object sender, EventArgs e)
         {
-
+            MessageBox.Show("ЗАГЛУШКА");
         }
 
         private void Docume(object sender, EventArgs e)
         {
-
+            MessageBox.Show("ЗАГЛУШКА");
         }
 
         private void HowWork(object sender, EventArgs e)
         {
-
+            MessageBox.Show("ЗАГЛУШКА");
         }
 
         private void AboutProg(object sender, EventArgs e)

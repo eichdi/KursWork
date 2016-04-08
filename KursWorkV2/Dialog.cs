@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Saver;
 using Newtonsoft.Json;
 using System.IO;
 namespace DialogModel
@@ -55,14 +54,14 @@ namespace DialogModel
             this.answer = answer;
             this.jumpTo = jumpTo;
         }
-        public override string ToString()
-        {
-            UnitS answerUnit = new UnitS("answer", answer);
-            UnitS jumpToUnit = new UnitS("jumpTo", jumpTo);
-            UnitS[] allUnit = { answerUnit, jumpToUnit };
-            ObjectS obj = new ObjectS("AnswerClass", allUnit);
-            return obj.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    UnitS answerUnit = new UnitS("answer", answer);
+        //    UnitS jumpToUnit = new UnitS("jumpTo", jumpTo);
+        //    UnitS[] allUnit = { answerUnit, jumpToUnit };
+        //    ObjectS obj = new ObjectS("AnswerClass", allUnit);
+        //    return obj.ToString();
+        //}
     }
 
     public class AnswerClass:IADE<AnswerElem>
@@ -115,20 +114,19 @@ namespace DialogModel
         }
         public AnswerClass(AnswerElem[] answer)
         {
-            this.answer = answer.ToList();
+            if (answer != null)
+                this.answer = answer.ToList();
+            else
+                this.answer = new List<AnswerElem>();
         }
-        public AnswerClass()
-        {
-            this.answer = new List<AnswerElem>();
-        }
-        
-        public override string ToString()
-        {
-            UnitS answerUnit = new UnitS("answer", answer.ToArray());
-            UnitS[] allUnit = { answerUnit };
-            ObjectS obj = new ObjectS("AnswerClass", allUnit);
-            return obj.ToString();
-        }
+
+        //public override string ToString()
+        //{
+        //    UnitS answerUnit = new UnitS("answer", answer.ToArray());
+        //    UnitS[] allUnit = { answerUnit };
+        //    ObjectS obj = new ObjectS("AnswerClass", allUnit);
+        //    return obj.ToString();
+        //}
     }
 
     public class QuestionElem
@@ -161,7 +159,7 @@ namespace DialogModel
         {
             if (answers == null)
             {
-                this.answers = new AnswerClass();
+                this.answers = new AnswerClass(null);
             }
             else
             {
@@ -169,23 +167,14 @@ namespace DialogModel
             }
             this.question = question;
         }
-        //Save is work, but Open is not work, why?
-        //public string Saves()
+        //public override string ToString()
         //{
-        //    return JsonConvert.SerializeObject(answers);
+        //    UnitS answersUnit = new UnitS("answer", answers);
+        //    UnitS questionUnit = new UnitS("jumpTo", question);
+        //    UnitS[] allUnit = { answersUnit, questionUnit };
+        //    ObjectS obj = new ObjectS("Question", allUnit);
+        //    return obj.ToString();
         //}
-        //public void Open(string file)
-        //{
-        //    answers = JsonConvert.DeserializeObject<AnswerClass>(file);
-        //}
-        public override string ToString()
-        {
-            UnitS answersUnit = new UnitS("answer", answers);
-            UnitS questionUnit = new UnitS("jumpTo", question);
-            UnitS[] allUnit = { answersUnit, questionUnit };
-            ObjectS obj = new ObjectS("Question", allUnit);
-            return obj.ToString();
-        }
 
     }
 
@@ -246,13 +235,13 @@ namespace DialogModel
             return question[index];
         }
 
-        public override string ToString()
-        {
-            UnitS questionUnit = new UnitS("answer", question.ToArray());
-            UnitS[] allUnit = { questionUnit };
-            ObjectS obj = new ObjectS("AnswerClass", allUnit);
-            return obj.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    UnitS questionUnit = new UnitS("answer", question.ToArray());
+        //    UnitS[] allUnit = { questionUnit };
+        //    ObjectS obj = new ObjectS("AnswerClass", allUnit);
+        //    return obj.ToString();
+        //}
     }
 
 
@@ -290,14 +279,14 @@ namespace DialogModel
                 this.questions = new QuestionClass(null);
             this.name = name;
         }
-        public override string ToString()
-        {
-            UnitS nameUnit = new UnitS("name", name);
-            UnitS questionsUnit = new UnitS("questions", questions);
-            UnitS[] allUnit = { nameUnit, nameUnit };
-            ObjectS obj = new ObjectS("Question", allUnit);
-            return obj.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    UnitS nameUnit = new UnitS("name", name);
+        //    UnitS questionsUnit = new UnitS("questions", questions);
+        //    UnitS[] allUnit = { nameUnit, nameUnit };
+        //    ObjectS obj = new ObjectS("Question", allUnit);
+        //    return obj.ToString();
+        //}
     }
 
     public class DialogClass:IADE<DialogElem>
@@ -359,13 +348,13 @@ namespace DialogModel
                 return dialogs.ToArray();
             }
         }
-        public override string ToString()
-        {
-            UnitS dialogsUnit = new UnitS("dialogs", dialogs.ToArray());
-            UnitS[] allUnit = { dialogsUnit };
-            ObjectS obj = new ObjectS("DialogClass", allUnit);
-            return obj.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    UnitS dialogsUnit = new UnitS("dialogs", dialogs.ToArray());
+        //    UnitS[] allUnit = { dialogsUnit };
+        //    ObjectS obj = new ObjectS("DialogClass", allUnit);
+        //    return obj.ToString();
+        //}
     }
 }
 
